@@ -16,8 +16,8 @@ services:
     user: root
     volumes:
       - coroot_data:/data
-    ports:
-      - 8080:8080
+    expose:
+      - "8080"
     command:
       - '--data-dir=/data'
       - '--bootstrap-prometheus-url=http://prometheus:9090'
@@ -70,8 +70,8 @@ services:
       - '--web.console.templates=/usr/share/prometheus/consoles'
       - '--web.enable-lifecycle'
       - '--web.enable-remote-write-receiver'
-    ports:
-      - '127.0.0.1:9090:9090'
+    expose:
+      - "9090"
 
   clickhouse:
     restart: always
@@ -81,8 +81,8 @@ services:
     volumes:
       - clickhouse_data:/var/lib/clickhouse
       - clickhouse_logs:/var/log/clickhouse-server
-    ports:
-      - '127.0.0.1:9000:9000'
+    expose:
+      - "9000"
     ulimits:
       nofile:
         soft: 262144
